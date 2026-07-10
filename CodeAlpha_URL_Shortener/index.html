@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>🔗 URL Shortener</h1>
+    <p>Enter a long URL and generate a short link.</p>
+
+    <form method="POST">
+        <input
+            type="url"
+            name="long_url"
+            placeholder="https://example.com"
+            required
+        >
+
+        <button type="submit">Shorten URL</button>
+    </form>
+
+    {% if short_url %}
+    <div class="result">
+        <h3>Short URL</h3>
+
+        <input
+            type="text"
+            id="shortLink"
+            value="{{ short_url }}"
+            readonly
+        >
+
+        <button onclick="copyLink()">Copy Link</button>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function copyLink() {
+    const link = document.getElementById("shortLink");
+    link.select();
+    document.execCommand("copy");
+    alert("Link copied!");
+}
+</script>
+
+</body>
+</html>
